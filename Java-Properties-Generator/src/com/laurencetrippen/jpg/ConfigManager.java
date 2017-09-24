@@ -1,5 +1,6 @@
 package com.laurencetrippen.jpg;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,9 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
-
-import com.laurencetrippen.jpg.reflect.ConfigFile;
-import com.laurencetrippen.jpg.reflect.ConfigProperty;
 
 public class ConfigManager<T> {
 
