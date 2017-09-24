@@ -75,6 +75,7 @@ public class Tester {
 
 	public static void main(String[] args) {
 		ConfigManager<Configuration> cm = new ConfigManager<>(Configuration.class);
+		cm.generateConfig();
 		
 		Configuration cfg = cm.load();
 		
