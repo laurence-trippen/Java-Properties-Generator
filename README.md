@@ -1,8 +1,8 @@
 # Java Properties Generator
 
 ```java
-import com.laurencetrippen.jpg.reflect.ConfigFile;
-import com.laurencetrippen.jpg.reflect.ConfigProperty;
+import com.laurencetrippen.jpg.ConfigFile;
+import com.laurencetrippen.jpg.ConfigProperty;
 
 @ConfigFile(path = "config/app.properties")
 public class Configuration {
