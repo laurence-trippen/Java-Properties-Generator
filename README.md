@@ -1,4 +1,4 @@
-# Java App Config Library
+# Java Properties Generator
 
 ```java
 import com.laurencetrippen.jacl.reflect.ConfigFile;
