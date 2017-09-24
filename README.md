@@ -68,7 +68,9 @@ public class Configuration {
 				+ ", lazyLoading=" + lazyLoading + "]";
 	}
 }
+```
 
+```java
 import com.laurencetrippen.jacl.ConfigManager;
 
 public class Tester {
