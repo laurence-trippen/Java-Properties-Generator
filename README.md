@@ -1,4 +1,4 @@
-# Java-App-Config-Library
+# Java App Config Library
 
 ```java
 import com.laurencetrippen.jacl.reflect.ConfigFile;
