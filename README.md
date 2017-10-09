@@ -1,5 +1,8 @@
 # Java Properties Generator
 
+An easy Java library to generate Java Properties files. 
+The files will be created like tables in the JPA. 
+
 ```java
 import com.laurencetrippen.jpg.ConfigFile;
 import com.laurencetrippen.jpg.ConfigProperty;
