@@ -1,4 +1,5 @@
 # Java Properties Generator
+by Laurence Trippen
 
 An easy Java library to generate Java Properties files. 
 The files will be created like tables in the JPA. 
