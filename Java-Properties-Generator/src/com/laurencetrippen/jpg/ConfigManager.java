@@ -12,6 +12,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
 
+import com.laurencetrippen.jpg.exception.ConfigFileAlreadyExistException;
+import com.laurencetrippen.jpg.exception.ConfigFileNotDefinedException;
+import com.laurencetrippen.jpg.exception.ConfigFileNotExistException;
+import com.laurencetrippen.jpg.exception.PathNotExistException;
+
 public class ConfigManager<T> {
 
 	private Class<T> type;
@@ -20,7 +25,7 @@ public class ConfigManager<T> {
 		this.type = type;
 	}
 
-	public T generateConfig() {
+	public T generateConfig() throws ConfigFileNotDefinedException, PathNotExistException, ConfigFileAlreadyExistException {
 		if (type.isAnnotationPresent(ConfigFile.class)) {
 			ConfigFile configFile = type.getAnnotation(ConfigFile.class);
 			File file = new File(configFile.path());
@@ -38,15 +43,15 @@ public class ConfigManager<T> {
 				try {
 					properties.store(new FileOutputStream(file), null);
 				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+					throw new PathNotExistException(e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			} else {
-				System.out.println("Datei existiert schon!");
+				throw new ConfigFileAlreadyExistException(configFile.path());
 			}
 		} else {
-			System.out.println("Typ besitzt keine ConfigFile Annotation!");
+			throw new ConfigFileNotDefinedException();
 		}
 
 		return null;
@@ -125,7 +130,7 @@ public class ConfigManager<T> {
 		}
 	}
 
-	public T load() {
+	public T load() throws ConfigFileNotDefinedException, ConfigFileNotExistException {
 		T instance = null;
 		if (type.isAnnotationPresent(ConfigFile.class)) {
 			ConfigFile configFile = type.getAnnotation(ConfigFile.class);
@@ -193,10 +198,10 @@ public class ConfigManager<T> {
 					}
 				}
 			} else {
-				System.out.println("Datei existiert nicht!");
+				throw new ConfigFileNotExistException(configFile.path());
 			}
 		} else {
-			System.out.println("Typ besitzt keine ConfigFile Annotation!");
+			throw new ConfigFileNotDefinedException();
 		}
 
 		return instance;
