@@ -95,20 +95,33 @@ of the ConfigManager. ;-)
 ## The Test class
 ```java
 import com.laurencetrippen.jpg.ConfigManager;
+import com.laurencetrippen.jpg.exception.ConfigFileAlreadyExistException;
+import com.laurencetrippen.jpg.exception.ConfigFileNotDefinedException;
+import com.laurencetrippen.jpg.exception.ConfigFileNotExistException;
+import com.laurencetrippen.jpg.exception.PathNotExistException;
 
 public class Tester {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ConfigFileNotDefinedException, PathNotExistException {
 		ConfigManager<Configuration> cm = new ConfigManager<>(Configuration.class);
-		cm.generateConfig();
 		
-		Configuration cfg = cm.load();
+		try {
+			cm.generateConfig();
+		} catch (ConfigFileAlreadyExistException e) {
+			e.printStackTrace();
+		}
 		
-		cfg.setPort(880);
-		cfg.setIp("255.255.255.255");
-		cfg.setTimeout(20.2f);
-		cfg.setDelay(20.4054);
-		cfg.setLazyLoading(true);
+		Configuration cfg = null;
+		try {
+			cfg = cm.load();
+			cfg.setPort(880);
+			cfg.setIp("255.255.255.255");
+			cfg.setTimeout(20.2f);
+			cfg.setDelay(20.4054);
+			cfg.setLazyLoading(true);
+		} catch (ConfigFileNotExistException e) {
+			e.printStackTrace();
+		}		
 		
 		cm.save(cfg);
 	}
