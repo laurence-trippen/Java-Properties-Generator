@@ -1,3 +1,3 @@
 theme: jekyll-theme-cayman
 title: Java Properties Generator
-description: An easy Java library to generate Java Properties files. The files will be created like tables in the JPA.
+description: An easy Java library to generate Java Properties files object relational.
