@@ -19,27 +19,53 @@ import com.laurencetrippen.jpg.exception.PathNotExistException;
 
 public class ConfigManager<T> {
 
+	public static enum GenerationMode {
+		OVERIDDE,
+		NO_OVERRIDE
+	}
+	
 	private Class<T> type;
 
 	public ConfigManager(Class<T> type) {
 		this.type = type;
 	}
 
-	public T generateConfig() throws ConfigFileNotDefinedException, PathNotExistException, ConfigFileAlreadyExistException {
+	public T generateConfig(GenerationMode generationMode) throws ConfigFileNotDefinedException, PathNotExistException, ConfigFileAlreadyExistException {
 		if (type.isAnnotationPresent(ConfigFile.class)) {
 			ConfigFile configFile = type.getAnnotation(ConfigFile.class);
 			File file = new File(configFile.path());
-
-			if (!file.exists()) {
+			
+			if (generationMode == GenerationMode.NO_OVERRIDE) {				
+				if (!file.exists()) {
+					Field[] fields = type.getDeclaredFields();
+					Properties properties = new Properties();
+					
+					for (Field field : fields) {
+						if (field.isAnnotationPresent(ConfigProperty.class)) {
+							properties.setProperty(field.getName(), "");
+						}
+					}
+					
+					try {
+						properties.store(new FileOutputStream(file), null);
+					} catch (FileNotFoundException e) {
+						throw new PathNotExistException(e.getMessage());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					throw new ConfigFileAlreadyExistException(configFile.path());
+				}
+			} else if (generationMode == GenerationMode.OVERIDDE) {
 				Field[] fields = type.getDeclaredFields();
 				Properties properties = new Properties();
-
+				
 				for (Field field : fields) {
 					if (field.isAnnotationPresent(ConfigProperty.class)) {
 						properties.setProperty(field.getName(), "");
 					}
 				}
-
+				
 				try {
 					properties.store(new FileOutputStream(file), null);
 				} catch (FileNotFoundException e) {
@@ -47,8 +73,6 @@ public class ConfigManager<T> {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			} else {
-				throw new ConfigFileAlreadyExistException(configFile.path());
 			}
 		} else {
 			throw new ConfigFileNotDefinedException();
