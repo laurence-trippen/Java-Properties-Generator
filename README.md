@@ -3,6 +3,8 @@
 At first you must create an class which represents the 
 Java Properties files as an object. In this example the class will take the name Configuration.
 The class needs the *@ConfigFile* annotation with an path as parameter.
+The path can be relative or absolute in the file system, but the path
+must exist otherwise a PathNotFoundException will be thrown.
 The library will recognize the *@ConfigFile* annotation.
 
 All class members you want to save in the properties file must be annotated
@@ -14,7 +16,7 @@ with *@ConfigProperty* and additional getter and setter must be added.
 import com.laurencetrippen.jpg.ConfigFile;
 import com.laurencetrippen.jpg.ConfigProperty;
 
-@ConfigFile(path = "config/app.properties")
+@ConfigFile(path = "C:/config.properties")
 public class Configuration {
 
 	@ConfigProperty
