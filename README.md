@@ -106,7 +106,7 @@ public class Tester {
 		ConfigManager<Configuration> cm = new ConfigManager<>(Configuration.class);
 		
 		try {
-			cm.generateConfig();
+			cm.generateConfig(ConfigManager.GenerationMode.NO_OVERRIDE);
 		} catch (ConfigFileAlreadyExistException e) {
 			e.printStackTrace();
 		}
