@@ -1,7 +1,5 @@
 # Java Properties Generator by Laurence Trippen
-
-## Tutorial
-
+<br/>
 At first you must create an class which represents the 
 Java Properties files as an object. In this example the class will take the name Configuration.
 The class needs the *@ConfigFile* annotation with an path as parameter.
@@ -9,7 +7,7 @@ The library will recognize the *@ConfigFile* annotation.
 
 All class members you want to save in the properties file must be annotated
 with *@ConfigProperty* and additional getter and setter must be added.
-
+<br/>
 ## The Configuration class
 
 ```java
@@ -75,7 +73,7 @@ public class Configuration {
 	}
 }
 ```
-
+<br/>
 To use and manage the configuration class, you must instantiate a ConfigManager.
 The ConfigManager class is a generic class that requires the configuration class as a parameter
 In addition the constructor of the ConfigMananger class needs the class type 
@@ -91,7 +89,7 @@ which we defined as Configuraion class in this example.
 With the represtional object you can manipulate the data with getters and setter. 
 Last but not least, you can also save the data using the *save()* method
 of the ConfigManager. ;-)
-
+<br/>
 ## The Test class
 ```java
 import com.laurencetrippen.jpg.ConfigManager;
