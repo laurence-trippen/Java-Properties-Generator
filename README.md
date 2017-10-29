@@ -1,14 +1,14 @@
+
+
 # by Laurence Trippen
+At first you create a class which represents the Java Properties files as an object. 
+In this example, this class will have the name "configuration".
 
-At first you must create an class which represents the 
-Java Properties files as an object. In this example the class will take the name Configuration.
-The class needs the *@ConfigFile* annotation with an path as parameter.
-The path can be relative or absolute in the file system, but the path
-must exist otherwise a PathNotFoundException will be thrown.
-The library will recognize the *@ConfigFile* annotation.
+The class needs the *@ConfigFile* annotation with a path as parameter. 
+The path can be relative or absolute in the file system, but the path must exist, otherwise a "PathNotFoundException" will appear. The library will recognize the *@ConfigFile* annotation.
 
-All class members you want to save in the properties file must be annotated
-with *@ConfigProperty* and additional getter and setter must be added.
+All class members you want to save in the properties file, must be annotated 
+with *@ConfigProperty*, additional "getter" and "setter" must be added.
 
 ## The Configuration class
 
@@ -76,21 +76,15 @@ public class Configuration {
 }
 ```
 
-To use and manage the configuration class, you must instantiate a ConfigManager.
-The ConfigManager class is a generic class that requires the configuration class as a parameter
-In addition the constructor of the ConfigMananger class needs the class type 
-of the desired configuration class.
+To use and manage the configuration class, you must instantiate a ConfigManager. The ConfigManager class is a generic class that requires the configuration class as a parameter. Also the constructor of the ConfigMananger class needs the class type of the desired configuration class.
 
-After the creation of an ConfigManager object you need to call the
-*generateConfig()* method to generate the Java properties file in
-the filesystem.
+After the creation of the "ConfigManager"- object, you need to invoke the *generateConfig()* method to generate the Java properties file in the filesystem.
 
 After this you can load the properties file in the represtional object
-which we defined as Configuraion class in this example.
+which we defined as Configuration class in this example.
 
 With the represtional object you can manipulate the data with getters and setter. 
-Last but not least, you can also save the data using the *save()* method
-of the ConfigManager. ;-)
+Now you can save the data using the *save()* method of the ConfigManager. 
 
 ## The Test class
 ```java
